@@ -1,7 +1,7 @@
 const create = require('./create')
 
-const UserService = db => ({
+const UserDomain = db => ({
   create: create(db),
 })
 
-module.exports = UserService
+module.exports = UserDomain
