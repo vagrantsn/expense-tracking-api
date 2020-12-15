@@ -14,6 +14,12 @@ services:
       - .:/app
       - /app/node_modules
 
+  api:
+    extends: base
+    command: yarn start
+    links:
+      - mongo
+
   test-unit:
     extends: base
     command: yarn test:unit

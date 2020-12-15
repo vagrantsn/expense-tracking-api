@@ -1,7 +1,7 @@
-import dotenv from 'dotenv'
-dotenv.config()
-
-import app from './app.js'
+require('./database/mongo')
+const app = require('./app')
 
 const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`Listening on port ${port}`))
+const server = app.listen(port, () => console.log(`Listening on port ${port}`))
+
+module.exports = server
