@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/index.js",
-    "test": "jest"
+    "test:unit": "TEST_ENV=unit jest --verbose",
   },
   "dependencies": {
     "bcrypt": "5.0.0",

@@ -15,3 +15,9 @@ logs:
 
 images:
 	docker-compose images
+
+bootstrap:
+	make build && make start
+
+test-unit:
+	docker-compose up --abort-on-container-exit test-unit
