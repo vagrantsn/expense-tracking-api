@@ -5,7 +5,11 @@ const config = {
   testTimeout: 10000,
 }
 
-  // An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
-  // watchPathIgnorePatterns: [],
+const testEnv = process.env.TEST_ENV
+if (testEnv === 'e2e') {
+  config.testMatch = [
+    '**/?(*.)+(e2e).[tj]s?(x)'
+  ]
+}
 
 module.exports = config

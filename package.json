@@ -7,6 +7,7 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "test:unit": "TEST_ENV=unit jest --verbose",
+    "test:e2e": "TEST_ENV=e2e jest --verbose"
   },
   "dependencies": {
     "bcrypt": "5.0.0",
