@@ -1,6 +1,13 @@
-import express from 'express'
+const express = require('express')
+
+const users = require('./users')
+const errorHandler = require('../middlewares/error-handler')
 
 const routes = express.Router()
+
+routes.use(users)
+
+routes.use(errorHandler)
 
 routes.get('/status', (req, res) => res.json({
   health: 'good',
@@ -12,4 +19,4 @@ routes.get('*', (req, res) => res.status(404).json({
   message: 'Route not found',
 }))
 
-export default routes
+module.exports = routes

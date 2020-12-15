@@ -1,9 +1,13 @@
-import express from 'express'
+require('dotenv').config()
 
-import routes from './routes/index.js'
+const express = require('express')
+const bodyParser = require('body-parser')
+
+const routes = require('./routes/index.js')
 
 const app = express()
+app.use(bodyParser.json())
 
 app.use(routes)
 
-export default app
+module.exports = app
