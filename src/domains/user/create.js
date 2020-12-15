@@ -1,4 +1,4 @@
-const { hash } = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 const { BadRequest } = require('../../errors')
 
@@ -8,7 +8,7 @@ const create = db => async ({ email, password }) => {
     throw new BadRequest('unavailable-email', 'E-mail already registered')
   }
 
-  const encrypted = await hash(password, 10)
+  let encrypted = bcrypt.hashSync(password, 10)
 
   const user = await db.user.create({
     email,
