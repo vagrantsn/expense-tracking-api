@@ -4,6 +4,18 @@ class BaseError {
     this.message = message
     this.responseCode = responseCode
   }
+
+  toJson () {
+    const { responseCode, message, name } = this
+
+    return {
+      responseCode,
+      body: {
+        error: name,
+        message,
+      }
+    }
+  }
 }
 
 module.exports = BaseError
