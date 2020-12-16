@@ -8,10 +8,10 @@ stop:
 	docker-compose stop
 
 start:
-	docker-compose up -d
+	docker-compose up -d api mongo
 
 logs:
-	docker-compose logs -f
+	docker-compose logs -f api
 
 images:
 	docker-compose images
