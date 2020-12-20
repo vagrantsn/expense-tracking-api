@@ -1,16 +1,25 @@
 const dayjs = require('dayjs')
+const bcrypt = require('bcrypt')
 
 const AuthorizationDomain = require('.')
 
 const secret = 'test-secret'
-const domain = AuthorizationDomain(secret)
 
-test('returned token should expire in 1 hour', () => {
-  jest.useFakeTimers('modern')
-
-  const token = domain.createToken({
+test('returned token should expire in 1 hour', async () => {
+  const findByEmail = () => ({
     id: 'user-id',
     email: 'user@test.com',
+    password: bcrypt.hashSync('test', 10)
+  })
+  const db = { user: { findByEmail } }
+
+  const domain = AuthorizationDomain({ db, secret })
+
+  jest.useFakeTimers('modern')
+
+  const token = await domain.createToken({
+    email: 'user@test.com',
+    password: 'test',
   })
 
   const now = dayjs()

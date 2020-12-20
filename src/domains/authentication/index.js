@@ -1,7 +1,9 @@
-const authenticate = require('./authenticate')
+const createToken = require('./create-token')
+const verify = require('./verify')
 
-const authenticationDomain = db => ({
-  authenticate: authenticate(db)
+const AuthorizationDomain = ({ db, secret }) => ({
+  createToken: createToken({ secret, db }),
+  verify: verify(secret),
 })
 
-module.exports = authenticationDomain
+module.exports = AuthorizationDomain
