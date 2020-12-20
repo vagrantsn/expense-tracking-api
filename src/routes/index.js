@@ -11,6 +11,15 @@ routes.use(sessions)
 
 routes.use(errorHandler)
 
+routes.use((error, req, res, next) => {
+  console.error(error)
+
+  res.status(500).json({
+    error: 'internal-error',
+    message: 'An internal error ocurred'
+  })
+})
+
 routes.get('/status', (req, res) => res.json({
   health: 'good',
   date: new Date(),
