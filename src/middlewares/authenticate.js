@@ -5,11 +5,13 @@ const Unauthorized = require('../errors/Unauthorized')
 const authenticate = async (req, res, next) => {
   const token = req.get('Authorization')
 
-  const isValidToken = authenticationService.verify(token)
+  const decoded = authenticationService.verify(token)
 
-  if (!isValidToken) {
+  if (!decoded) {
     throw new Unauthorized('unauthorized-authentication', 'Access unauthorized')
   }
+
+  res.locals.authenticated = decoded
 
   next()
 }

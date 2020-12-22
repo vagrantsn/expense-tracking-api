@@ -20,12 +20,34 @@ test('calls next when authentication token is valid', async () => {
     }
   }
 
-  const res = {}
+  const res = { locals: {} }
   const next = jest.fn()
 
   await authenticate(req, res, next)
 
   expect(next).toBeCalledWith()
+})
+
+test('adds authenticated user to res.locals.authenticated', async () => {
+  const req = {
+    get: param => {
+      if (param === 'Authorization') {
+        const user = { id: 'user-id', email: 'test@email.com' }
+
+        return jwt.sign({ user }, secret)
+      }
+    }
+  }
+
+  const res = { locals: {} }
+  const next = jest.fn()
+
+  await authenticate(req, res, next)
+
+  expect(res.locals.authenticated).toEqual({
+    id: 'user-id',
+    email: 'test@email.com',
+  })
 })
 
 test('throws Unauthorized error when authentication token is invalid', async () => {
