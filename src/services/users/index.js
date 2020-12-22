@@ -1,5 +1,5 @@
-const create = require('./create')
+const db = require('../../repositories')
 
-module.exports = {
-  create,
-}
+const usersDomain = require('../../domains/user')
+
+module.exports = usersDomain(db)
