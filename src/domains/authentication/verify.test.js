@@ -30,6 +30,6 @@ test('returned token should expire in 1 hour', async () => {
   jest.setSystemTime(now.add(60, 'minute').valueOf())
   const afterExpiring = domain.verify(token)
 
-  expect(beforeExpiring).toBe(true)
+  expect(beforeExpiring).toEqual({ id: 'user-id', email: 'user@test.com' })
   expect(afterExpiring).toBe(false)
 })
