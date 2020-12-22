@@ -11,7 +11,7 @@ test('returned token should expire in 1 hour', async () => {
     email: 'user@test.com',
     password: bcrypt.hashSync('test', 10)
   })
-  const db = { user: { findByEmail } }
+  const db = { users: { findByEmail } }
 
   const domain = AuthorizationDomain({ db, secret })
 

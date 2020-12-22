@@ -32,7 +32,7 @@ test('should respond with required parameters error', async (done) => {
 })
 
 test('should respond with authorization token', async (done) => {
-  await repositories.user.create({
+  await repositories.users.create({
     email: 'test@email.com',
     password: bcrypt.hashSync('123', 10)
   })

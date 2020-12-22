@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const { Unauthorized } = require('../../errors')
 
 const createToken = ({ db, secret }) => async ({ email, password }) => {
-  const user = await db.user.findByEmail(email)
+  const user = await db.users.findByEmail(email)
 
   const isCorrectPassword = user && bcrypt.compareSync(password, user.password)
 

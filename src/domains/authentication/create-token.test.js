@@ -13,7 +13,7 @@ test('returns the authorization token when credentials are correct', async () =>
     email: 'user@test.com',
     password: bcrypt.hashSync('test', 10)
   })
-  const db = { user: { findByEmail } }
+  const db = { users: { findByEmail } }
 
   const domain = AuthorizationDomain({ db, secret })
 
@@ -31,7 +31,7 @@ test('should tokenize the user id and email', async () => {
     email: 'user@test.com',
     password: bcrypt.hashSync('test', 10)
   })
-  const db = { user: { findByEmail } }
+  const db = { users: { findByEmail } }
 
   const domain = AuthorizationDomain({ db, secret })
 
@@ -49,7 +49,7 @@ test('should tokenize the user id and email', async () => {
 })
 
 test('throws UnauthorizedError when user is not found', async () => {
-  const db = { user: { findByEmail: () => null } }
+  const db = { users: { findByEmail: () => null } }
 
   const domain = AuthorizationDomain({ db, secret })
 
@@ -70,7 +70,7 @@ test('throws UnauthorizedError when credentials are wrong', async () => {
     email: 'user@test.com',
     password: bcrypt.hashSync('test', 10)
   })
-  const db = { user: { findByEmail } }
+  const db = { users: { findByEmail } }
 
   const domain = AuthorizationDomain({ db, secret })
 
