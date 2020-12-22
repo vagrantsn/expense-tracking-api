@@ -2,6 +2,7 @@ const config = {
   clearMocks: true,
   coverageProvider: "v8",
   testEnvironment: "node",
+  timers: 'modern',
   testTimeout: 10000,
 }
 
