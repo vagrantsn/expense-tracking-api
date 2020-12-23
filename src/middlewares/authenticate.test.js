@@ -2,6 +2,9 @@ process.env.JWT_SECRET = '123'
 
 const jwt = require('jsonwebtoken')
 const dayjs = require('dayjs')
+const { SchemaTypes } = require('mongoose')
+
+SchemaTypes['ClockDate'] = SchemaTypes.Date
 
 const authenticate = require('./authenticate')
 
@@ -50,7 +53,7 @@ test('adds authenticated user to res.locals.authenticated', async () => {
   })
 })
 
-test('throws Unauthorized error when authentication token is invalid', async () => {
+test('calls next with Unauthorized error when authentication token is invalid', async () => {
   const user = { id: 'user-id', email: 'test@email.com' }
   const options = { expiresIn: '1h' }
   const token = jwt.sign({ user }, secret, options)
@@ -64,17 +67,14 @@ test('throws Unauthorized error when authentication token is invalid', async () 
   }
 
   const res = {}
-  const next = {}
+  const next = jest.fn()
 
   const now = dayjs()
   jest.setSystemTime(now.add(60, 'minute').valueOf())
 
-  try {
-    await authenticate(req, res, next)
-  } catch (e) {
-    expect(e).toBeInstanceOf(Unauthorized)
-    expect(e.name).toBe('unauthorized-authentication')
-    expect(e.message).toBe('Access unauthorized')
-  }
+  await authenticate(req, res, next)
+
+  const expectedError = new Unauthorized('unauthorized-authentication', 'Unauthorized Access')
+  expect(next).toHaveBeenCalledWith(expectedError)
 })
 

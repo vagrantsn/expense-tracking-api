@@ -8,7 +8,8 @@ const authenticate = async (req, res, next) => {
   const decoded = authenticationService.verify(token)
 
   if (!decoded) {
-    throw new Unauthorized('unauthorized-authentication', 'Access unauthorized')
+    const error = new Unauthorized('unauthorized-authentication', 'Unauthorized Access')
+    return next(error)
   }
 
   res.locals.authenticated = decoded
