@@ -2,14 +2,6 @@ const InternalError = require('../../errors/InternalError')
 
 const operationsDomain = require('.')
 
-/*
-  you can only search for operations you own
-
-  if provided with an id, search by id and returns only one item in a list
-  if not provided with an id, search by the parameters provided and returns a list
-  if nothing is found, returns an empty list
-*/
-
 test('it merges passed query with userId', async () => {
   const findAll = jest.fn()
   const operations = { findAll }
@@ -31,7 +23,7 @@ test('it merges passed query with userId', async () => {
     amount: 1000,
     tags: ['food'],
     userId: '123',
-  }, { createdAt: 'descending' })
+  }, { createdAt: 'ascending' })
 })
 
 test('calls findAll with userId when not filtering by id', async () => {
@@ -45,7 +37,7 @@ test('calls findAll with userId when not filtering by id', async () => {
 
   expect(findAll).toHaveBeenCalledWith({
     userId: '123',
-  }, { createdAt: 'descending' })
+  }, { createdAt: 'ascending' })
 })
 
 test('calls findAll with userId when filtering by id', async () => {
@@ -60,10 +52,10 @@ test('calls findAll with userId when filtering by id', async () => {
   expect(findAll).toHaveBeenCalledWith({
     id: 'operation-id',
     userId: '123',
-  }, { createdAt: 'descending' })
+  }, { createdAt: 'ascending' })
 })
 
-test('calls findAll with descending sort by createdAt', async () => {
+test('calls findAll with ascending sort by createdAt', async () => {
   const findAll = jest.fn()
   const operations = { findAll }
 
@@ -74,7 +66,7 @@ test('calls findAll with descending sort by createdAt', async () => {
 
   expect(findAll).toHaveBeenCalledWith({
     userId: '123',
-  }, { createdAt: 'descending' })
+  }, { createdAt: 'ascending' })
 })
 
 test('throws InternalError when userId is not provided', async () => {

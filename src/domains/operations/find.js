@@ -11,7 +11,7 @@ const find = db => async (userId, query) => {
   }
 
   const builtQuery = mergeLeft({ userId }, query)
-  const sort = { createdAt: 'descending' }
+  const sort = { createdAt: 'ascending' }
 
   const result = await db.operations.findAll(builtQuery, sort)
 
