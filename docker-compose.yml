@@ -35,6 +35,8 @@ services:
 
   mongo:
     image: mongo:4.4.2
+    logging:
+      driver: none
     environment:
       - MONGO_INITDB_ROOT_USERNAME=
       - MONGO_INITDB_ROOT_PASSWORD=
