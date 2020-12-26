@@ -3,6 +3,7 @@ const {
   either,
   equals,
   filter,
+  pick,
 } = require('ramda')
 
 const db = require('../../database')
@@ -11,12 +12,17 @@ const isNilOrUndefined = either(equals(null), equals(undefined))
 
 const filterEmptyProps = filter(complement(isNilOrUndefined))
 
-const find = async ({
-  amount,
-  label,
-  tags,
-  userId,
-}, { createdAt }) => {
+const find = async (
+  {
+    amount,
+    label,
+    tags,
+    userId,
+  } = {},
+  {
+    createdAt,
+  } = {}
+) => {
   const filteredQuery = filterEmptyProps({
     amount,
     label,
@@ -24,11 +30,22 @@ const find = async ({
     userId,
   })
 
-  console.log(filteredQuery)
+  const operations = await db.Operation
+    .find(filteredQuery)
+    .sort({ createdAt })
+    .lean()
 
-  const operations = await db.Operation.find(filteredQuery).sort({ createdAt })
+  const fieldsToReturn = [
+    'amount', 'label', 'tags', 'createdAt', 'updatedAt'
+  ]
 
-  return operations
+  const result = operations.map(operation => ({
+    id: operation._id.toString(),
+    userId: operation.userId.toString(),
+    ...pick(fieldsToReturn, operation),
+  }))
+
+  return result
 }
 
 module.exports = find
