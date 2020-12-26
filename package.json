@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/index.js",
-    "test:unit": "TEST_ENV=unit jest --verbose",
-    "test:e2e": "TEST_ENV=e2e jest --verbose"
+    "test:unit": "jest --group=unit --verbose",
+    "test:integration": "jest --group=integration --verbose"
   },
   "dependencies": {
     "bcrypt": "5.0.0",
@@ -22,6 +22,9 @@
   },
   "devDependencies": {
     "jest": "26.6.3",
+    "jest-docblock": "26.0.0",
+    "jest-runner": "26.6.3",
+    "jest-runner-groups": "2.0.1",
     "nodemon": "2.0.6",
     "supertest": "6.0.1",
     "uuid": "8.3.2"

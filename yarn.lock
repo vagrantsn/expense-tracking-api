@@ -2541,7 +2541,7 @@ jest-diff@^26.6.2:
     jest-get-type "^26.3.0"
     pretty-format "^26.6.2"
 
-jest-docblock@^26.0.0:
+jest-docblock@26.0.0, jest-docblock@^26.0.0:
   version "26.0.0"
   resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-26.0.0.tgz#3e2fa20899fc928cb13bd0ff68bd3711a36889b5"
   integrity sha512-RDZ4Iz3QbtRWycd8bUEPxQsTlYazfYn/h5R65Fc6gOfwozFhoImx+affzky/FFBuqISPTqjXomoIGJVKBWoo0w==
@@ -2708,7 +2708,12 @@ jest-resolve@^26.6.2:
     resolve "^1.18.1"
     slash "^3.0.0"
 
-jest-runner@^26.6.3:
+jest-runner-groups@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/jest-runner-groups/-/jest-runner-groups-2.0.1.tgz#a4d2c102e3e1a37aa9899d5452a13fc5b7e4b531"
+  integrity sha512-MDTgnYnFhtaJ+zSdLRBdYL5AFZ6tno1mbx2FW233OejH3U3lojQbxgrpfjypmYELMdOvgHS7n65jQ4Q2sFrEGw==
+
+jest-runner@26.6.3, jest-runner@^26.6.3:
   version "26.6.3"
   resolved "https://registry.yarnpkg.com/jest-runner/-/jest-runner-26.6.3.tgz#2d1fed3d46e10f233fd1dbd3bfaa3fe8924be159"
   integrity sha512-atgKpRHnaA2OvByG/HpGA4g6CSPS/1LK0jK3gATJAoptC1ojltpmVlYC3TYgdmGp+GLuhzpH30Gvs36szSL2JQ==

@@ -1,27 +1,24 @@
-const { Types } = require('mongoose')
+/**
+ * @group integration
+ */
 
-const db = require('../../database')
+const { Types } = require('mongoose')
 
 const testdb = require('../../../test/mongo')
 
-const find = require('./find')
+const create = require('./create')
 
-let operations
+let operation
 
 beforeAll(async () => {
   testdb.connect()
 
   const userId = Types.ObjectId()
 
-  await new db.Operation({
+  operation = await create({
     amount: 1000,
     label: 'Coffee',
-    tags: ['food'],
-    userId,
-  }).save()
-
-  operations = await find({
-    amount: 1000,
+    tags: ['drinks'],
     userId,
   })
 })
@@ -30,40 +27,36 @@ afterAll(async () => {
   await testdb.disconnect()
 })
 
-test('returns an array with 1 item', () => {
-  expect(operations).toHaveLength(1)
-})
-
 test('returns the id as string', () => {
-  expect(typeof operations[0].id).toBe('string')
+  expect(typeof operation.id).toBe('string')
 })
 
 test('returns the expected amount', () => {
-  expect(operations[0].amount).toBe(1000)
+  expect(operation.amount).toBe(1000)
 })
 
 test('returns the expected label', () => {
-  expect(operations[0].label).toBe('Coffee')
+  expect(operation.label).toBe('Coffee')
 })
 
 test('returns the tags list', () => {
-  expect(operations[0].tags).toEqual(['food'])
+  expect(operation.tags).toEqual(['drinks'])
 })
 
 test('returns the userId as string', () => {
-  expect(typeof operations[0].userId).toBe('string')
+  expect(typeof operation.userId).toBe('string')
 })
 
 test('returns the createdAt as a Date', () => {
-  expect(operations[0].createdAt).toBeInstanceOf(Date)
+  expect(operation.createdAt).toBeInstanceOf(Date)
 })
 
 test('returns the updatedAt as a Date', () => {
-  expect(operations[0].updatedAt).toBeInstanceOf(Date)
+  expect(operation.updatedAt).toBeInstanceOf(Date)
 })
 
 test('returns the expected keys', () => {
-  const keys = Object.keys(operations[0]).sort()
+  const keys = Object.keys(operation).sort()
 
   const expected = [
     'id',

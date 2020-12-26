@@ -1,3 +1,7 @@
+/**
+ * @group integration
+ */
+
 const supertest = require('supertest')
 
 const testdb = require('../../../test/mongo')

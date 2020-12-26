@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 const schema = require('./create')
 
 const schemaValidator = require('../../../validations/schema')

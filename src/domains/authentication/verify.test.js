@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 const dayjs = require('dayjs')
 const bcrypt = require('bcrypt')
 

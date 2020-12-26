@@ -1,22 +1,24 @@
-const { Types } = require('mongoose')
+/**
+ * @group integration
+ */
 
 const db = require('../../database')
 
 const testdb = require('../../../test/mongo')
 
-const findByEmail = require('./findByEmail')
+const findById = require('./findById')
 
 let user
 
 beforeAll(async () => {
   testdb.connect()
 
-  await new db.User({
+  const { id } = await new db.User({
     email: 'test@email.com',
     password: '123',
   }).save()
 
-  user = await findByEmail('test@email.com')
+  user = await findById(id)
 })
 
 afterAll(async () => {

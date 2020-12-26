@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 const errorHandler = require('./error-handler')
 
 const BaseError = require('../errors/BaseError')

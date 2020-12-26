@@ -1,3 +1,7 @@
+/**
+ * @group integration
+ */
+
 const supertest = require('supertest')
 const bcrypt = require('bcrypt')
 const { omit } = require('ramda')

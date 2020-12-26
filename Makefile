@@ -22,5 +22,5 @@ bootstrap:
 test-unit:
 	docker-compose up --abort-on-container-exit test-unit
 
-test-e2e:
-	docker-compose up --abort-on-container-exit test-e2e mongo
+test-integration:
+	docker-compose up --abort-on-container-exit test-integration mongo

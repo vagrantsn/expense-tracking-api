@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 const InternalError = require('../../errors/InternalError')
 
 const operationsDomain = require('.')

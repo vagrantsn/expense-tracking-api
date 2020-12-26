@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 const yup = require('yup')
 
 const schemaValidate = require('./schema-validate')

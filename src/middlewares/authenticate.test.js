@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 process.env.JWT_SECRET = '123'
 
 const jwt = require('jsonwebtoken')
@@ -54,6 +58,8 @@ test('adds authenticated user to res.locals.authenticated', async () => {
 })
 
 test('calls next with Unauthorized error when authentication token is invalid', async () => {
+  jest.useFakeTimers('modern')
+
   const user = { id: 'user-id', email: 'test@email.com' }
   const options = { expiresIn: '1h' }
   const token = jwt.sign({ user }, secret, options)

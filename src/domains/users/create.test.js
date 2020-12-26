@@ -1,3 +1,9 @@
+/**
+ * User domain tests
+ *
+ * @group unit
+ */
+
 const {
   always,
   mergeLeft,

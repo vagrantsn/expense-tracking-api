@@ -25,9 +25,9 @@ services:
     extends: base
     command: yarn test:unit
 
-  test-e2e:
+  test-integration:
     extends: base
-    command: yarn test:e2e
+    command: yarn test:integration
     links:
       - mongo
     environment:

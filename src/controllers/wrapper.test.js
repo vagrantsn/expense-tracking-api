@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 const wrapAsync = require('./wrapper')
 
 test('should return true if controller succeeds', async () => {
