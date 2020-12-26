@@ -1,5 +1,5 @@
 const {
-  pickAll,
+  pick,
 } = require('ramda')
 
 const db = require('../../database')
@@ -19,16 +19,14 @@ const create = async ({
 
   const raw = operation.toObject()
 
+  const fieldsToReturn = [
+    'amount', 'label', 'tags', 'createdAt', 'updatedAt'
+  ]
+
   const response = {
-    id: raw._id,
-    ...pickAll([
-      'amount',
-      'label',
-      'tags',
-      'userId',
-      'createdAt',
-      'updatedAt',
-    ], raw)
+    id: raw._id.toString(),
+    userId: raw.userId.toString(),
+    ...pick(fieldsToReturn, raw),
   }
 
   return response
