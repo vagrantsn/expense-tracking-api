@@ -1,9 +1,12 @@
-const { mergeLeft } = require('ramda')
+const {
+  mergeLeft,
+  is,
+} = require('ramda')
 
 const InternalError = require('../../errors/InternalError')
 
 const find = db => async (userId, query) => {
-  if (!userId) {
+  if (!userId || !is(String, userId)) {
     throw new InternalError()
   }
 

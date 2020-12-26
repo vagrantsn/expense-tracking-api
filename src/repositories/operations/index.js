@@ -3,5 +3,5 @@ const find = require('./find')
 
 module.exports = {
   create,
-  find,
+  findAll: find,
 }
