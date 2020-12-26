@@ -8,7 +8,7 @@ const create = async (req, res) => {
   const user = await usersService.create({ email, password })
 
   return res.json({
-    id: user.id.toString(),
+    id: user.id,
     email: user.email,
   })
 }

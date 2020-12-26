@@ -61,7 +61,7 @@ test('should respond with the created operation', async (done) => {
     amount: 1000,
     label: 'Pizza',
     tags: ['food'],
-    userId: user._id.toString(),
+    userId: user.id,
   })
 
   done()

@@ -49,7 +49,7 @@ test('responds with empty array when no operations are found', async () => {
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
-    userId: user._id.toString(),
+    userId: user.id,
   })
 
   const { body, status } = await request.get('/operations')
@@ -77,7 +77,7 @@ test('responds with found operations', async () => {
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
-    userId: user._id.toString(),
+    userId: user.id,
   })
 
   const { body, status } = await request.get('/operations')
@@ -89,13 +89,13 @@ test('responds with found operations', async () => {
   expect(status).toBe(200)
   expect(body).toEqual([
     {
-      id: operation.id.toString(),
+      id: operation.id,
       amount: 1000,
       label: 'Coffee',
       tags: ['food'],
-      user_id: user.id.toString(),
-      created_at: operation.createdAt,
-      updated_at: operation.updatedAt,
+      user_id: user.id,
+      created_at: operation.createdAt.toISOString(),
+      updated_at: operation.updatedAt.toISOString(),
     }
   ])
 })
@@ -115,14 +115,14 @@ test('responds with found operations sorted by createdAt', async () => {
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
-    userId: user.id.toString(),
+    userId: user.id,
   })
 
   await repositories.operations.create({
     amount: 1000,
     label: 'Cookies',
     tags: ['food'],
-    userId: user._id.toString(),
+    userId: user.id,
   })
 
   const { body, status } = await request.get('/operations')
@@ -133,13 +133,5 @@ test('responds with found operations sorted by createdAt', async () => {
 
   expect(status).toBe(200)
   expect(body).toHaveLength(2)
-  expect(body[0]).toEqual({
-    id: operation.id.toString(),
-    amount: 1000,
-    label: 'Coffee',
-    tags: ['food'],
-    userId: user.id.toString(),
-    created_at: operation.createdAt,
-    updated_at: operation.updatedAt,
-  })
+  expect(body[0].id).toEqual(operation.id)
 })
