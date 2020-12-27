@@ -23,11 +23,11 @@ services:
 
   test-unit:
     extends: base
-    command: yarn test:unit
+    command: yarn test:unit $JEST_OPTIONS
 
   test-integration:
     extends: base
-    command: yarn test:integration
+    command: yarn test:integration $JEST_OPTIONS
     links:
       - mongo
     environment:
