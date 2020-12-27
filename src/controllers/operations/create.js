@@ -2,6 +2,8 @@ const wrapAsync = require('../wrapper')
 
 const operationsService = require('../../services/operations')
 
+const toJson = require('../../formatters/json/operation')
+
 const create = async (req, res) => {
   const {
     amount,
@@ -18,7 +20,7 @@ const create = async (req, res) => {
     userId,
   })
 
-  return res.status(200).json(operation)
+  return res.status(200).json(toJson(operation))
 }
 
 module.exports = wrapAsync(create)

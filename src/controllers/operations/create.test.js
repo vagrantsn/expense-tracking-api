@@ -47,12 +47,12 @@ test('should respond with the created operation', async (done) => {
 
   expect(status).toBe(200)
   expect(typeof body.id).toBe('string')
-  expect(typeof body.createdAt).toBe('string')
-  expect(typeof body.updatedAt).toBe('string')
+  expect(typeof body.created_at).toBe('string')
+  expect(typeof body.updated_at).toBe('string')
   expect(body.amount).toBe(1000)
   expect(body.label).toBe('Pizza')
   expect(body.tags).toEqual(['food'])
-  expect(body.userId).toBe(user.id)
+  expect(body.user_id).toBe(user.id)
 
   done()
 })
