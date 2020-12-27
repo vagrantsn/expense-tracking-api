@@ -3,13 +3,13 @@ const {
   either,
   equals,
   filter,
-  pick,
 } = require('ramda')
 
 const db = require('../../database')
 
-const isNilOrUndefined = either(equals(null), equals(undefined))
+const formatOperation = require('./format')
 
+const isNilOrUndefined = either(equals(null), equals(undefined))
 const filterEmptyProps = filter(complement(isNilOrUndefined))
 
 const find = async (
@@ -35,15 +35,7 @@ const find = async (
     .sort({ createdAt })
     .lean()
 
-  const fieldsToReturn = [
-    'amount', 'label', 'tags', 'createdAt', 'updatedAt'
-  ]
-
-  const result = operations.map(operation => ({
-    id: operation._id.toString(),
-    userId: operation.userId.toString(),
-    ...pick(fieldsToReturn, operation),
-  }))
+  const result = operations.map(formatOperation)
 
   return result
 }

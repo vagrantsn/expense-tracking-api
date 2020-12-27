@@ -1,8 +1,6 @@
-const {
-  pick,
-} = require('ramda')
-
 const db = require('../../database')
+
+const formatOperation = require('./format')
 
 const create = async ({
   amount,
@@ -17,17 +15,9 @@ const create = async ({
     userId,
   }).save()
 
-  const raw = operation.toObject()
+  const obj = operation.toObject()
 
-  const fieldsToReturn = [
-    'amount', 'label', 'tags', 'createdAt', 'updatedAt'
-  ]
-
-  const response = {
-    id: raw._id.toString(),
-    userId: raw.userId.toString(),
-    ...pick(fieldsToReturn, raw),
-  }
+  const response = formatOperation(obj)
 
   return response
 }
