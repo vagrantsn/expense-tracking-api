@@ -1,13 +1,11 @@
 const db = require('../../database')
 
+const formatUser = require('./format')
+
 const findByEmail = async (email) => {
   const user = await db.User.where({ email }).findOne().lean()
 
-  return user && {
-    id: user._id.toString(),
-    email: user.email,
-    password: user.password,
-  }
+  return user && formatUser(user)
 }
 
 module.exports = findByEmail
