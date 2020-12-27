@@ -7,4 +7,5 @@ const uri = `mongodb://${config.host}:${config.port}`
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 })
