@@ -3,13 +3,11 @@
  */
 
 const supertest = require('supertest')
-const bcrypt = require('bcrypt')
-const { omit } = require('ramda')
 
 const testdb = require('../../../test/mongo')
 const app = require('../../app')
 
-const repositories = require('../../repositories')
+const createSession = require('../../../test/integration/sessions')
 
 const request = supertest(app)
 
@@ -37,15 +35,7 @@ test('should respond with required parameters error', async (done) => {
 })
 
 test('should respond with the created operation', async (done) => {
-  const user = await repositories.users.create({
-    email: 'test@email.com',
-    password: bcrypt.hashSync('123', 10)
-  })
-
-  const { body: { token } } = await request.post('/sessions').send({
-    email: 'test@email.com',
-    password: '123',
-  })
+  const { user, token } = await createSession()
 
   const { status, body } = await request.post('/operations')
     .set('Authorization', token)
@@ -59,14 +49,10 @@ test('should respond with the created operation', async (done) => {
   expect(typeof body.id).toBe('string')
   expect(typeof body.createdAt).toBe('string')
   expect(typeof body.updatedAt).toBe('string')
-
-  const dbProps = ['id', 'createdAt', 'updatedAt']
-  expect(omit(dbProps, body)).toEqual({
-    amount: 1000,
-    label: 'Pizza',
-    tags: ['food'],
-    userId: user.id,
-  })
+  expect(body.amount).toBe(1000)
+  expect(body.label).toBe('Pizza')
+  expect(body.tags).toEqual(['food'])
+  expect(body.userId).toBe(user.id)
 
   done()
 })

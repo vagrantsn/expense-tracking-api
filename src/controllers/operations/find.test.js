@@ -3,12 +3,13 @@
  */
 
 const supertest = require('supertest')
-const bcrypt = require('bcrypt')
 
 const testdb = require('../../../test/mongo')
 const app = require('../../app')
 
 const repositories = require('../../repositories')
+
+const createSession = require('../../../test/integration/sessions')
 
 const request = supertest(app)
 
@@ -21,15 +22,7 @@ afterEach(async () => {
 })
 
 test('responds with empty array when there are no operations', async () => {
-  await repositories.users.create({
-    email: 'test@email.com',
-    password: bcrypt.hashSync('123', 10),
-  })
-
-  const { body: { token } } = await request.post('/sessions').send({
-    email: 'test@email.com',
-    password: '123',
-  })
+  const { token } = await createSession()
 
   const { body, status } = await request.get('/operations')
     .set('Authorization', token)
@@ -39,15 +32,7 @@ test('responds with empty array when there are no operations', async () => {
 })
 
 test('responds with empty array when no operations are found', async () => {
-  const user = await repositories.users.create({
-    email: 'test@email.com',
-    password: bcrypt.hashSync('123', 10),
-  })
-
-  const { body: { token } } = await request.post('/sessions').send({
-    email: 'test@email.com',
-    password: '123',
-  })
+  const { user, token } = await createSession()
 
   await repositories.operations.create({
     amount: 1000,
@@ -67,15 +52,7 @@ test('responds with empty array when no operations are found', async () => {
 })
 
 test('responds with found operations', async () => {
-  const user = await repositories.users.create({
-    email: 'test@email.com',
-    password: bcrypt.hashSync('123', 10),
-  })
-
-  const { body: { token } } = await request.post('/sessions').send({
-    email: 'test@email.com',
-    password: '123',
-  })
+  const { user, token } = await createSession()
 
   const operation = await repositories.operations.create({
     amount: 1000,
@@ -105,15 +82,7 @@ test('responds with found operations', async () => {
 })
 
 test('responds with found operations sorted by createdAt', async () => {
-  const user = await repositories.users.create({
-    email: 'test@email.com',
-    password: bcrypt.hashSync('123', 10),
-  })
-
-  const { body: { token } } = await request.post('/sessions').send({
-    email: 'test@email.com',
-    password: '123',
-  })
+  const { user, token } = await createSession()
 
   const operation = await repositories.operations.create({
     amount: 1000,

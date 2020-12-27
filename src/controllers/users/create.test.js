@@ -34,14 +34,14 @@ test('should respond with required parameters error', async (done) => {
 })
 
 test('should respond with the created user', async (done) => {
-  const response = await request.post('/users').send({
+  const { body, status } = await request.post('/users').send({
     email: 'user-test@email.com',
     password: '123',
   })
 
-  expect(response.status).toBe(200)
-  expect(typeof response.body.id).toBe('string')
-  expect(response.body.email).toBe('user-test@email.com')
+  expect(status).toBe(200)
+  expect(typeof body.id).toBe('string')
+  expect(body.email).toBe('user-test@email.com')
 
   done()
 })
@@ -54,9 +54,7 @@ test('should respond with unavailable email error', async (done) => {
 
   await request.post('/users').send(payload)
 
-  const response = await request.post('/users').send(payload)
-
-  const { body, status } = response
+  const { body, status } = await request.post('/users').send(payload)
 
   expect(status).toBe(400)
   expect(body.error).toBe('unavailable-email')
