@@ -27,12 +27,12 @@ const find = async (
     amount,
     label,
     tags,
-    userId,
+    user_id: userId,
   })
 
   const operations = await db.Operation
     .find(filteredQuery)
-    .sort({ createdAt })
+    .sort({ created_at: createdAt })
     .lean()
 
   const result = operations.map(formatOperation)

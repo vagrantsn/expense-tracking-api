@@ -12,11 +12,14 @@ const operationSchema = new mongoose.Schema({
   tags: {
     type: [String],
   },
-  userId: {
+  user_id: {
     type: mongoose.ObjectId,
   },
 }, {
-  timestamps: true,
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+  },
 })
 
 const Operation = mongoose.model('Operation', operationSchema)

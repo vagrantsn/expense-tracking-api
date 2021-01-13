@@ -4,12 +4,12 @@ const {
 
 const formatOperationFromDb = operation => {
   const fields = [
-    'amount', 'label', 'tags', 'createdAt', 'updatedAt'
+    'amount', 'label', 'tags', 'created_at', 'updated_at'
   ]
 
   return {
     id: operation._id.toString(),
-    userId: operation.userId.toString(),
+    user_id: operation.user_id.toString(),
     ...pick(fields, operation)
   }
 }

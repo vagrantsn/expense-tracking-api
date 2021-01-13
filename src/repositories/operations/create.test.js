@@ -44,15 +44,15 @@ test('returns the tags list', () => {
 })
 
 test('returns the userId as string', () => {
-  expect(typeof operation.userId).toBe('string')
+  expect(typeof operation.user_id).toBe('string')
 })
 
 test('returns the createdAt as a Date', () => {
-  expect(operation.createdAt).toBeInstanceOf(Date)
+  expect(operation.created_at).toBeInstanceOf(Date)
 })
 
 test('returns the updatedAt as a Date', () => {
-  expect(operation.updatedAt).toBeInstanceOf(Date)
+  expect(operation.updated_at).toBeInstanceOf(Date)
 })
 
 test('returns the expected keys', () => {
@@ -63,9 +63,9 @@ test('returns the expected keys', () => {
     'amount',
     'label',
     'tags',
-    'userId',
-    'createdAt',
-    'updatedAt',
+    'user_id',
+    'created_at',
+    'updated_at',
   ].sort()
 
   expect(keys).toEqual(expected)

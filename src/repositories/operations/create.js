@@ -12,7 +12,7 @@ const create = async ({
     amount,
     label,
     tags,
-    userId,
+    user_id: userId,
   }).save()
 
   const obj = operation.toObject()

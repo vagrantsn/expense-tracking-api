@@ -21,7 +21,7 @@ beforeAll(async () => {
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
-    userId,
+    user_id: userId,
   }).save()
 
   operations = await find({
@@ -55,15 +55,15 @@ test('returns the tags list', () => {
 })
 
 test('returns the userId as string', () => {
-  expect(typeof operations[0].userId).toBe('string')
+  expect(typeof operations[0].user_id).toBe('string')
 })
 
 test('returns the createdAt as a Date', () => {
-  expect(operations[0].createdAt).toBeInstanceOf(Date)
+  expect(operations[0].created_at).toBeInstanceOf(Date)
 })
 
 test('returns the updatedAt as a Date', () => {
-  expect(operations[0].updatedAt).toBeInstanceOf(Date)
+  expect(operations[0].updated_at).toBeInstanceOf(Date)
 })
 
 test('returns the expected keys', () => {
@@ -74,9 +74,9 @@ test('returns the expected keys', () => {
     'amount',
     'label',
     'tags',
-    'userId',
-    'createdAt',
-    'updatedAt',
+    'user_id',
+    'created_at',
+    'updated_at',
   ].sort()
 
   expect(keys).toEqual(expected)
