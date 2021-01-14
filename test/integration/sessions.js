@@ -1,7 +1,7 @@
-const { v4: uuid } = require('uuid')
+import { v4 as uuid } from 'uuid'
 
-const usersService = require('../../src/services/users')
-const authenticationService = require('../../src/services/authentication')
+import usersService from '../../src/services/users'
+import authenticationService from '../../src/services/authentication'
 
 const createSession = async () => {
   const randomEmail = `${uuid().split('-')[0]}@email.com`

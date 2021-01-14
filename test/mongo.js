@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const { v4: uuid } = require('uuid')
+import mongoose from 'mongoose'
+import { v4 as uuid } from 'uuid'
 
 const connect = async () => {
   const randomDbName = uuid().split('-')[0]
@@ -15,7 +15,7 @@ const connect = async () => {
 
 const disconnect = async () => mongoose.connection.close()
 
-module.exports = {
+export default {
   connect,
   disconnect,
 }
