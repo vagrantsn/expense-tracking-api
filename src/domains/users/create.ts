@@ -2,7 +2,10 @@ import bcrypt from 'bcrypt'
 
 import { BadRequest } from '../../errors'
 
-const create = db => async ({ email, password }) => {
+const create = db => async (
+  { email, password } :
+  { email: string, password: string }
+) => {
   const existentUser = await db.users.findByEmail(email)
   if (existentUser) {
     throw new BadRequest('unavailable-email', 'E-mail already registered')

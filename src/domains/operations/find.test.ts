@@ -18,6 +18,7 @@ test('it merges passed query with userId', async () => {
     label: 'coffee',
     amount: 1000,
     tags: ['food'],
+    userId: 'user-id',
   }
 
   await domain.find(userId, query)
@@ -71,19 +72,6 @@ test('calls findAll with ascending sort by createdAt', async () => {
   expect(findAll).toHaveBeenCalledWith({
     userId: '123',
   }, { createdAt: 'ascending' })
-})
-
-test('throws InternalError when userId is not provided', async () => {
-  const findAll = () => [{ id: 'operation-id' }]
-  const operations = { findAll }
-
-  const domain = operationsDomain({ operations })
-
-  try {
-    await domain.find(null, {})
-  } catch (error) {
-    expect(error).toBeInstanceOf(InternalError)
-  }
 })
 
 test('returns the database response', async () => {

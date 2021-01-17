@@ -19,13 +19,16 @@ test('saves operation with the provided payload', async () => {
     amount: 5000,
     label: 'Pizza',
     tags: ['food'],
+    userId: 'user-id',
   }
-  const created = await domain.create(payload)
+
+  await domain.create(payload)
 
   expect(operationsSave).toHaveBeenCalledWith({
     amount: 5000,
     label: 'Pizza',
     tags: ['food'],
+    userId: 'user-id',
   })
 })
 
@@ -40,13 +43,16 @@ test('saves empty tags by default', async () => {
   const payload = {
     amount: 5000,
     label: 'Pizza',
+    userId: 'user-id',
   }
-  const created = await domain.create(payload)
+
+  await domain.create(payload)
 
   expect(operationsSave).toHaveBeenCalledWith({
     amount: 5000,
     label: 'Pizza',
     tags: [],
+    userId: 'user-id',
   })
 })
 

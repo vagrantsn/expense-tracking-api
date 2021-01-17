@@ -1,13 +1,9 @@
 import Unauthorized from '../../errors/Unauthorized'
 
-const create = db => async (operationPayload) => {
-  const {
-    amount,
-    label,
-    tags,
-    userId,
-  } = operationPayload
-
+const create = db => async (
+  { amount, label, tags = [], userId } :
+  { amount: number, label: string, tags?: string[], userId: string }
+) => {
   const user = await db.users.findById(userId)
 
   if (!user) {
@@ -17,7 +13,7 @@ const create = db => async (operationPayload) => {
   const operation = await db.operations.create({
     amount,
     label,
-    tags: tags || [],
+    tags,
     userId,
   })
 

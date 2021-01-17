@@ -1,15 +1,10 @@
 import {
   mergeLeft,
-  is,
 } from 'ramda'
 
-import InternalError from '../../errors/InternalError'
+import { Query } from '../../repositories/operations/find'
 
-const find = db => async (userId, query) => {
-  if (!userId || !is(String, userId)) {
-    throw new InternalError()
-  }
-
+const find = db => async (userId: string, query?: Query) => {
   const builtQuery = mergeLeft({ userId }, query)
   const sort = { createdAt: 'ascending' }
 
