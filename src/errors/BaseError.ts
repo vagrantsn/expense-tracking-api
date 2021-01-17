@@ -1,4 +1,8 @@
 class BaseError {
+  name = ''
+  message = ''
+  responseCode = 0
+
   constructor (name, message, responseCode) {
     this.name = name
     this.message = message
