@@ -1,13 +1,19 @@
+import { Types } from 'mongoose'
+
 import db from '../../database'
 
 import formatOperation from './format'
 
-const create = async ({
-  amount,
-  label,
-  tags,
-  userId,
-}) => {
+interface Query {
+  amount: number,
+  label: string,
+  tags?: string[],
+  userId: string|Types.ObjectId,
+}
+
+const create = async (
+  { amount, label, tags = [], userId } : Query
+) => {
   const operation = await new db.Operation({
     amount,
     label,

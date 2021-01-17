@@ -18,7 +18,7 @@ beforeAll(async () => {
     password: '123',
   }).save()
 
-  user = await findById(id)
+  user = await findById(id || '')
 })
 
 afterAll(async () => {

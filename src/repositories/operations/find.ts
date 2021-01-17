@@ -4,6 +4,7 @@ import {
   equals,
   filter,
 } from 'ramda'
+import { Types } from 'mongoose'
 
 import db from '../../database'
 
@@ -12,16 +13,21 @@ import formatOperation from './format'
 const isNilOrUndefined = either(equals(null), equals(undefined))
 const filterEmptyProps = filter(complement(isNilOrUndefined))
 
+export interface Query {
+  id?: string|Types.ObjectId,
+  amount?: number,
+  label?: string,
+  tags?: string[],
+  userId?: string|Types.ObjectId
+}
+
+interface Sort {
+  createdAt?: string
+}
+
 const find = async (
-  {
-    amount,
-    label,
-    tags,
-    userId,
-  } = {},
-  {
-    createdAt,
-  } = {}
+  { amount, label, tags, userId } : Query,
+  { createdAt } : Sort = {}
 ) => {
   const filteredQuery = filterEmptyProps({
     amount,
