@@ -2,14 +2,17 @@
  * @group unit
  */
 
-import yup from 'yup'
+import {
+  object,
+  string,
+} from 'yup'
 
 import schemaValidate from './schema-validate'
 
 import ParamError from '../errors/ParamError'
 
-const schema = yup.object().shape({
-  body: yup.object().shape({ name: yup.string().required() }),
+const schema = object().shape({
+  body: object().shape({ name: string().required() }),
 })
 
 test('should call next without args when schema is valid', async () => {

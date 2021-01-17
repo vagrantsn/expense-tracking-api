@@ -46,7 +46,7 @@ test('adds authenticated user to res.locals.authenticated', async () => {
     }
   }
 
-  const res = { locals: {} }
+  const res : { locals: { authenticated?: object } } = { locals: {} }
   const next = jest.fn()
 
   await authenticate(req, res, next)
