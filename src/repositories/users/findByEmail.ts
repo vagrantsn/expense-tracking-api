@@ -1,11 +1,12 @@
 import db from '../../database'
+import User from '../../types/User'
 
-import formatUser from './format'
+const findByEmail = async (email: string) : Promise<User|null> => {
+  const user = await db.User.where('email', email).findOne()
 
-const findByEmail = async (email: string) => {
-  const user = await db.User.where('email', email).findOne().lean()
+  if (!user) return null
 
-  return user && formatUser(user)
+  return user.toObject()
 }
 
 export default findByEmail

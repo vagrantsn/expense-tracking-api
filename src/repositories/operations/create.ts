@@ -2,7 +2,7 @@ import { Types } from 'mongoose'
 
 import db from '../../database'
 
-import formatOperation from './format'
+import Operation from '../../types/Operation'
 
 interface Query {
   amount: number,
@@ -13,7 +13,7 @@ interface Query {
 
 const create = async (
   { amount, label, tags = [], userId } : Query
-) => {
+) : Promise<Operation> => {
   const operation = await new db.Operation({
     amount,
     label,
@@ -23,9 +23,7 @@ const create = async (
 
   const obj = operation.toObject()
 
-  const response = formatOperation(obj)
-
-  return response
+  return obj
 }
 
 export default create

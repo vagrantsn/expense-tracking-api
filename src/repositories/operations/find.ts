@@ -8,7 +8,7 @@ import { Types } from 'mongoose'
 
 import db from '../../database'
 
-import formatOperation from './format'
+import Operation from '../../types/Operation'
 
 const isNilOrUndefined = either(equals(null), equals(undefined))
 const filterEmptyProps = filter(complement(isNilOrUndefined))
@@ -22,13 +22,13 @@ export interface Query {
 }
 
 interface Sort {
-  createdAt?: string
+  createdAt?: 'ascending'|'descending',
 }
 
 const find = async (
   { amount, label, tags, userId } : Query,
   { createdAt } : Sort = {}
-) => {
+) : Promise<Operation[]> => {
   const filteredQuery = filterEmptyProps({
     amount,
     label,
@@ -36,14 +36,11 @@ const find = async (
     user_id: userId,
   })
 
-  const operations = await db.Operation
-    .find(filteredQuery)
-    .sort({ created_at: createdAt })
-    .lean()
+  const operations = (
+    await db.Operation.find(filteredQuery).sort({ created_at: createdAt })
+  ).map(op => op.toObject())
 
-  const result = operations.map(formatOperation)
-
-  return result
+  return operations
 }
 
 export default find

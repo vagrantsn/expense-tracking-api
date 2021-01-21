@@ -1,14 +1,13 @@
 import db from '../../database'
-
-import formatUser from './format'
+import User from '../../types/User'
 
 const create = async (
   { email, password } :
-  { email: string, password: string}
-) => {
+  { email: string, password: string }
+) : Promise<User> => {
   const user = await new db.User({ email, password }).save()
 
-  return formatUser(user)
+  return user.toObject()
 }
 
 export default create

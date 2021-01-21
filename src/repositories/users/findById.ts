@@ -1,11 +1,12 @@
 import db from '../../database'
+import User from '../../types/User'
 
-import formatUser from './format'
+const findById = async (id: string) : Promise<User|null> => {
+  const user = await db.User.findById(id)
 
-const findById = async (id: string) => {
-  const user = await db.User.findById(id).lean()
+  if (!user) return null
 
-  return user && formatUser(user)
+  return user.toObject()
 }
 
 export default findById

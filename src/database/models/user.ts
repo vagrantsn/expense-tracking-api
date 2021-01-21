@@ -1,6 +1,9 @@
-import mongoose from 'mongoose'
+import { Document, model, Schema } from 'mongoose'
+import { omit } from 'ramda'
 
-const userSchema = new mongoose.Schema({
+import UserType from '../../types/User'
+
+const userSchema = new Schema<User>({
   email: {
     type: String,
     index: {
@@ -8,8 +11,17 @@ const userSchema = new mongoose.Schema({
     },
   },
   password: String,
+}, {
+  toObject: {
+    transform: (doc, ret) : UserType => ({
+      id: doc.id,
+      ...omit(['_id', '__v'], ret),
+    }),
+  },
 })
 
-const User = mongoose.model('User', userSchema)
+interface User extends UserType, Document {}
+
+const User = model<User>('User', userSchema)
 
 export default User

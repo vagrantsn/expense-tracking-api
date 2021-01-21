@@ -18,4 +18,4 @@ const createSession = async () => {
   return { user, token }
 }
 
-module.exports = createSession
+export default createSession
