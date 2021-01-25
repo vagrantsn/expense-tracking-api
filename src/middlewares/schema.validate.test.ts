@@ -16,10 +16,10 @@ const schema = object().shape({
 })
 
 test('should call next without args when schema is valid', async () => {
-  const req = {
+  const req: any = {
     body: { name: 'test' },
   }
-  const res = {}
+  const res: any = {}
   const next = jest.fn()
 
   const middleware = schemaValidate(schema)
@@ -30,8 +30,8 @@ test('should call next without args when schema is valid', async () => {
 })
 
 test('should call next with error when schema is not valid', async () => {
-  const req = { body: {} }
-  const res = {}
+  const req: any = { body: {} }
+  const res: any = {}
   const next = jest.fn()
 
   const middleware = schemaValidate(schema)

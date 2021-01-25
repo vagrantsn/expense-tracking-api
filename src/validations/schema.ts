@@ -1,4 +1,9 @@
-const schemaValidator = ({ schema, payload }) => schema.validate(payload, {
+import { AnySchema } from 'yup'
+
+const schemaValidator = (
+  { schema, payload } :
+  { schema: AnySchema, payload: object },
+) => schema.validate(payload, {
   abortEarly: false,
   strict: true,
 })

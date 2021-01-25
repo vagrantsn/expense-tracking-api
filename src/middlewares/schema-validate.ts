@@ -1,8 +1,11 @@
+import { Handler } from 'express'
+import { AnySchema } from 'yup'
+
 import ParamError from '../errors/ParamError'
 
 import schemaValidator from '../validations/schema'
 
-const schemaValidate = schema => async (req, res, next) => {
+const schemaValidate = (schema: AnySchema): Handler => async (req, res, next) => {
   const { body, params, query } = req
 
   try {
