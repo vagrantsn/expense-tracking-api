@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 import { Unauthorized } from '../../errors'
+import User from '../../types/user'
 
 import AuthorizationDomain from '.'
 
@@ -19,7 +20,7 @@ test('returns the authorization token when credentials are correct', async () =>
   })
   const db = { users: { findByEmail } }
 
-  const domain = AuthorizationDomain({ db, secret })
+  const domain = AuthorizationDomain<any>({ db, secret })
 
   const token = await domain.createToken({
     email: 'user@test.com',
@@ -37,14 +38,14 @@ test('should tokenize the user id and email', async () => {
   })
   const db = { users: { findByEmail } }
 
-  const domain = AuthorizationDomain({ db, secret })
+  const domain = AuthorizationDomain<any>({ db, secret })
 
   const token = await domain.createToken({
     email: 'user@test.com',
     password: 'test',
   })
 
-  const { user } = jwt.verify(token, secret)
+  const { user } = jwt.verify(token, secret) as { user: User }
 
   expect(user).toEqual({
     id: 'user-id',
@@ -55,7 +56,7 @@ test('should tokenize the user id and email', async () => {
 test('throws UnauthorizedError when user is not found', async () => {
   const db = { users: { findByEmail: () => null } }
 
-  const domain = AuthorizationDomain({ db, secret })
+  const domain = AuthorizationDomain<any>({ db, secret })
 
   try {
     await domain.createToken({
@@ -76,7 +77,7 @@ test('throws UnauthorizedError when credentials are wrong', async () => {
   })
   const db = { users: { findByEmail } }
 
-  const domain = AuthorizationDomain({ db, secret })
+  const domain = AuthorizationDomain<any>({ db, secret })
 
   try {
     await domain.createToken({

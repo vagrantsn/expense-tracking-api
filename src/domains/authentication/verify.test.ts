@@ -17,7 +17,7 @@ test('returned token should expire in 1 hour', async () => {
   })
   const db = { users: { findByEmail } }
 
-  const domain = AuthorizationDomain({ db, secret })
+  const domain = AuthorizationDomain<any>({ db, secret })
 
   jest.useFakeTimers('modern')
 
