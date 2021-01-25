@@ -5,12 +5,13 @@
 import { Types } from 'mongoose'
 
 import db from '../../database'
+import Operation from '../../types/operation'
 
 import testdb from '../../../test/mongo'
 
 import find from './find'
 
-let operations
+let operations: Operation[]
 
 beforeAll(async () => {
   testdb.connect()
@@ -26,7 +27,7 @@ beforeAll(async () => {
 
   operations = await find({
     amount: 1000,
-    userId,
+    user_id: userId,
   })
 })
 

@@ -1,29 +1,18 @@
-import { Types } from 'mongoose'
-
 import db from '../../database'
 
-import Operation from '../../types/Operation'
-
-interface Query {
-  amount: number,
-  label: string,
-  tags?: string[],
-  userId: string|Types.ObjectId,
-}
+import Operation from '../../types/operation'
 
 const create = async (
-  { amount, label, tags = [], userId } : Query
+  { amount, label, tags = [], user_id } : Operation
 ) : Promise<Operation> => {
   const operation = await new db.Operation({
     amount,
     label,
     tags,
-    user_id: userId,
+    user_id,
   }).save()
 
-  const obj = operation.toObject()
-
-  return obj
+  return operation.toObject()
 }
 
 export default create

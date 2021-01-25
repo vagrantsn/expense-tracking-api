@@ -3,12 +3,13 @@
  */
 
 import { Types } from 'mongoose'
+import Operation from '../../types/operation'
 
 import testdb from '../../../test/mongo'
 
 import create from './create'
 
-let operation
+let operation: Operation
 
 beforeAll(async () => {
   testdb.connect()
@@ -19,7 +20,7 @@ beforeAll(async () => {
     amount: 1000,
     label: 'Coffee',
     tags: ['drinks'],
-    userId,
+    user_id: userId,
   })
 })
 
