@@ -26,8 +26,8 @@ const buildExpressResponseObject = () => {
 }
 
 test('should respond with thrown error', () => {
-  const req = jest.fn()
-  const res = buildExpressResponseObject()
+  const req: any = jest.fn()
+  const res: any = buildExpressResponseObject()
   const next = jest.fn()
 
   const error = new BaseError('test-error', 'there was an error', 500)
@@ -42,8 +42,8 @@ test('should respond with thrown error', () => {
 })
 
 test('should call next if error is not instance of BaseError', () => {
-  const req = jest.fn()
-  const res = jest.fn()
+  const req: any = jest.fn()
+  const res: any = jest.fn()
   const next = jest.fn()
 
   const error = new Error('generic')

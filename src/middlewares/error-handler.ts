@@ -1,6 +1,8 @@
+import { ErrorRequestHandler } from 'express'
+
 import BaseError from '../errors/BaseError'
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   const extendsBaseError = err instanceof BaseError
   if (!extendsBaseError) return next(err)
 
