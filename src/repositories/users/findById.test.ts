@@ -5,7 +5,7 @@
 import db from '../../database'
 import User from '../../types/user'
 
-import testdb from '../../../test/mongo'
+import testdb from '../../tests/mongo'
 
 import findById from './findById'
 

@@ -7,7 +7,7 @@ import { Types } from 'mongoose'
 import db from '../../database'
 import Operation from '../../types/operation'
 
-import testdb from '../../../test/mongo'
+import testdb from '../../tests/mongo'
 
 import find from './find'
 

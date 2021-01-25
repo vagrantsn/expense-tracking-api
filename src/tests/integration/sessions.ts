@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 
-import usersService from '../../src/services/users'
-import authenticationService from '../../src/services/authentication'
+import usersService from '../../services/users'
+import authenticationService from '../../services/authentication'
 
 const createSession = async () => {
   const randomEmail = `${uuid().split('-')[0]}@email.com`

@@ -5,7 +5,7 @@
 import supertest from 'supertest'
 import bcrypt from 'bcrypt'
 
-import testdb from '../../../test/mongo'
+import testdb from '../../tests/mongo'
 import app from '../../app'
 
 import repositories from '../../repositories'

@@ -4,7 +4,7 @@
 
 import supertest from 'supertest'
 
-import testdb from '../../../test/mongo'
+import testdb from '../../tests/mongo'
 
 import app from '../../app'
 

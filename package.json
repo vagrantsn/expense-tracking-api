@@ -8,7 +8,7 @@
     "start": "nodemon",
     "test:unit": "jest --group=unit --verbose",
     "test:integration": "jest --group=integration --verbose",
-    "build": "tsc --project ."
+    "build": "tsc"
   },
   "dependencies": {
     "bcrypt": "5.0.0",

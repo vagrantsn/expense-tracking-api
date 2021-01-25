@@ -4,7 +4,7 @@
 
 import { Types } from 'mongoose'
 
-import testdb from '../../../test/mongo'
+import testdb from '../../tests/mongo'
 
 import User from '../../types/user'
 import create from './create'

@@ -4,12 +4,12 @@
 
 import supertest from 'supertest'
 
-import testdb from '../../../test/mongo'
+import testdb from '../../tests/mongo'
 import app from '../../app'
 
 import repositories from '../../repositories'
 
-import createSession from '../../../test/integration/sessions'
+import createSession from '../../tests/integration/sessions'
 
 const request = supertest(app)
 
