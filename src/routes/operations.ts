@@ -9,7 +9,7 @@ const routes = express.Router()
 
 routes.get(
   '/operations',
-  // schemaValidate(schemas.find),
+  schemaValidate(schemas.find),
   authenticate,
   operations.find,
 )

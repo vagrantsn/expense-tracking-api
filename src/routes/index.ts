@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { ErrorRequestHandler } from 'express'
 
 import users from './users'
 import sessions from './sessions'
@@ -14,14 +14,16 @@ routes.use(operations)
 
 routes.use(errorHandler)
 
-routes.use((error, req, res, next) => {
+const internalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   console.error(error)
 
   res.status(500).json({
     error: 'internal-error',
     message: 'An internal error ocurred'
   })
-})
+}
+
+routes.use(internalErrorHandler)
 
 routes.get('/status', (req, res) => res.json({
   health: 'good',
