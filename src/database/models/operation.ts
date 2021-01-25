@@ -1,9 +1,9 @@
 import { Document, model, Schema } from 'mongoose'
 import { omit } from 'ramda'
 
-import OperationType from '../../types/operation'
+import Operation from '../../types/operation'
 
-const operationSchema = new Schema<OperationType>({
+const operationSchema = new Schema({
   amount: {
     type: Number,
     required: true,
@@ -26,25 +26,14 @@ const operationSchema = new Schema<OperationType>({
     updatedAt: 'updated_at',
   },
   toObject: {
-    transform: (doc, ret) : OperationType => ({
+    transform: (doc, ret) : Operation => ({
       ...omit(['_id', '__v'], ret) as Operation,
       id: doc.id,
       user_id: ret.user_id.toString(),
     }),
-    // transform: (doc, ret) : OperationType => {
-    //   let cleanOperation = omit(['_id', '__v'], ret) as Operation
-
-    //   return {
-    //     ...cleanOperation,
-    //     id: doc.id,
-    //     user_id: ret.user_id.toString()
-    //   }
-    // },
   },
 })
 
-interface Operation extends OperationType, Document {}
-
-const Operation = model<Operation>('Operation', operationSchema)
+const Operation = model<Document & Operation>('Operation', operationSchema)
 
 export default Operation
