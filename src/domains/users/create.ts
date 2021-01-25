@@ -1,8 +1,9 @@
 import bcrypt from 'bcrypt'
 
+import Database from '../../types/database'
 import { BadRequest } from '../../errors'
 
-const create = db => async (
+const create = (db: Database) => async (
   { email, password } :
   { email: string, password: string }
 ) => {

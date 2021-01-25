@@ -1,6 +1,8 @@
 import create from './create'
 
-const UserDomain = db => ({
+import Database from '../../types/database'
+
+const UserDomain = <T extends Database>(db: T) => ({
   create: create(db),
 })
 

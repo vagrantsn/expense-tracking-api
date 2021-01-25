@@ -17,11 +17,13 @@ test('returns the user when creation succeeds', async () => {
   const payload = { email: 'user@test.com', password: '123' }
 
   const userdb = {
-    create: mergeLeft({ id: 'user-id' }),
-    findByEmail: always(null)
+    users: {
+      create: mergeLeft({ id: 'user-id' }),
+      findByEmail: always(null)
+    }
   }
 
-  const user = await UserDomain({ users: userdb }).create(payload)
+  const user = await UserDomain<any>(userdb).create(payload)
 
   expect(user.id).toBe('user-id')
   expect(user.email).toBe('user@test.com')
@@ -40,7 +42,7 @@ test('throws BadRequest error when using duplicate email', async () => {
   const payload = { email: 'user@test.com', password: '123' }
 
   try {
-    await UserDomain({ users: userdb }).create(payload)
+    await UserDomain<any>({ users: userdb }).create(payload)
   } catch (error) {
     expect(error).toBeInstanceOf(BadRequest)
     expect(error.name).toBe('unavailable-email')
