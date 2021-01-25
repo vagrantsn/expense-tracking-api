@@ -6,17 +6,21 @@ import schema from './find'
 
 import schemaValidator from '../../../validations/schema'
 
-test('amount should be an integer', async () => {
-  const query = { amount: 123.123 }
+test('amount should not have non numeric characters', async () => {
+  expect.assertions(1)
+
+  const query = { amount: 'abc' }
 
   try {
     await schemaValidator({ payload: { query }, schema })
   } catch (e) {
-    expect(e.errors).toContain('query.amount must be an integer')
+    expect(e.errors).toContain('query.amount must match the following: "/\\d+/"')
   }
 })
 
 test('label should be a string', async () => {
+  expect.assertions(1)
+
   const query = { label: 123 }
 
   try {
@@ -27,6 +31,8 @@ test('label should be a string', async () => {
 })
 
 test('tags should be an array of strings', async () => {
+  expect.assertions(1)
+
   const query = {
     amount: 1000,
     label: 'Pizza',

@@ -38,7 +38,7 @@ test('responds with empty array when no operations are found', async () => {
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
-    userId: user.id,
+    user_id: user.id!,
   })
 
   const { body, status } = await request.get('/operations')
@@ -58,7 +58,7 @@ test('responds with found operations', async () => {
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
-    userId: user.id,
+    user_id: user.id!,
   })
 
   const { body, status } = await request.get('/operations')
@@ -75,8 +75,8 @@ test('responds with found operations', async () => {
       label: 'Coffee',
       tags: ['food'],
       user_id: user.id,
-      created_at: operation.created_at.toISOString(),
-      updated_at: operation.updated_at.toISOString(),
+      created_at: operation.created_at?.toISOString(),
+      updated_at: operation.updated_at?.toISOString(),
     }
   ])
 })
@@ -88,14 +88,14 @@ test('responds with found operations sorted by created_at', async () => {
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
-    userId: user.id,
+    user_id: user.id!,
   })
 
   await repositories.operations.create({
     amount: 1000,
     label: 'Cookies',
     tags: ['food'],
-    userId: user.id,
+    user_id: user.id!,
   })
 
   const { body, status } = await request.get('/operations')

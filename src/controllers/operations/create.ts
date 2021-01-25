@@ -1,8 +1,10 @@
+import { Handler } from 'express'
+
 import wrapAsync from '../wrapper'
 
 import operationsService from '../../services/operations'
 
-const create = async (req, res) => {
+const create: Handler = async (req, res) => {
   const {
     amount,
     label,
@@ -15,7 +17,7 @@ const create = async (req, res) => {
     amount,
     label,
     tags,
-    userId,
+    user_id: userId,
   })
 
   return res.status(200).json(operation)
