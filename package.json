@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon",
-    "test:unit": "jest --group=unit --verbose",
-    "test:integration": "jest --group=integration --verbose",
+    "test:unit": "jest --group=unit",
+    "test:integration": "jest --group=integration",
     "build": "tsc"
   },
   "dependencies": {

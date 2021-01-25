@@ -1,4 +1,5 @@
 # Finance API :octocat:
+![build-and-test](https://github.com/vagnervst/finance-api/workflows/build-and-test/badge.svg)
 
 Expense tracking Node API intended for backend practicing. My main objective with this repo is to experiment with different technologies and practices so I can get a better understading of the most used solutions to common problems, and why they are used in the first place.
 
