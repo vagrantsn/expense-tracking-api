@@ -1,7 +1,9 @@
 import create from './create'
 import find from './find'
 
-const operationsDomain = db => ({
+import Database from '../../types/database'
+
+const operationsDomain = <T extends Database>(db: T) => ({
   create: create(db),
   find: find(db),
 })

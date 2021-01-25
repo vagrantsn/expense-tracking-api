@@ -1,14 +1,11 @@
-import {
-  mergeLeft,
-} from 'ramda'
+import { Query } from '../../types/database/operations'
+import Database from '../../types/database'
 
-import { Query } from '../../repositories/operations/find'
-
-const find = db => async (userId: string, query?: Query) => {
-  const builtQuery = mergeLeft({ userId }, query)
-  const sort = { createdAt: 'ascending' }
-
-  const result = await db.operations.findAll(builtQuery, sort)
+const find = (db: Database) => async (query : Query) => {
+  const result = await db.operations.findAll(
+    query,
+    { createdAt: 'ascending' }
+  )
 
   return result
 }

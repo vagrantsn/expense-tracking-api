@@ -13,13 +13,13 @@ test('saves operation with the provided payload', async () => {
   const users = { findById: () => ({ id: 'user-id' }) }
   const operations = { create: operationsSave }
 
-  const domain = operationsDomain({ operations, users })
+  const domain = operationsDomain<any>({ operations, users })
 
   const payload = {
     amount: 5000,
     label: 'Pizza',
     tags: ['food'],
-    userId: 'user-id',
+    user_id: 'user-id',
   }
 
   await domain.create(payload)
@@ -28,7 +28,7 @@ test('saves operation with the provided payload', async () => {
     amount: 5000,
     label: 'Pizza',
     tags: ['food'],
-    userId: 'user-id',
+    user_id: 'user-id',
   })
 })
 
@@ -38,12 +38,12 @@ test('saves empty tags by default', async () => {
   const users = { findById: () => ({ id: 'user-id' }) }
   const operations = { create: operationsSave }
 
-  const domain = operationsDomain({ operations, users })
+  const domain = operationsDomain<any>({ operations, users })
 
   const payload = {
     amount: 5000,
     label: 'Pizza',
-    userId: 'user-id',
+    user_id: 'user-id',
   }
 
   await domain.create(payload)
@@ -52,7 +52,7 @@ test('saves empty tags by default', async () => {
     amount: 5000,
     label: 'Pizza',
     tags: [],
-    userId: 'user-id',
+    user_id: 'user-id',
   })
 })
 
@@ -61,7 +61,7 @@ test('returns the newly created operation', async () => {
     amount: 1000,
     label: 'test operation',
     tags: ['food'],
-    userId: 'user-id',
+    user_id: 'user-id',
   }
 
   const mongoResponse = {
@@ -80,7 +80,7 @@ test('returns the newly created operation', async () => {
     operations: { create: () => mongoResponse }
   }
 
-  const domain = operationsDomain(db)
+  const domain = operationsDomain<any>(db)
 
   const created = await domain.create(payload)
 
@@ -94,13 +94,13 @@ test('throws unauthorized error if user does not exist', async () => {
     },
   }
 
-  const domain = operationsDomain(db)
+  const domain = operationsDomain<any>(db)
 
   try {
     await domain.create({
       amount: 1000,
       label: 'test operation',
-      userId: 'test-id',
+      user_id: 'test-id',
     })
   } catch (e) {
     expect(e).toBeInstanceOf(Unauthorized)

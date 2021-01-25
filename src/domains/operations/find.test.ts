@@ -2,32 +2,28 @@
  * @group unit
  */
 
-import InternalError from '../../errors/InternalError'
-
 import operationsDomain from '.'
 
-test('it merges passed query with userId', async () => {
+test('it merges passed query with user_id', async () => {
   const findAll = jest.fn()
   const operations = { findAll }
 
-  const domain = operationsDomain({ operations })
-
-  const userId = '123'
+  const domain = operationsDomain<any>({ operations })
 
   const query = {
     label: 'coffee',
     amount: 1000,
     tags: ['food'],
-    userId: 'user-id',
+    user_id: 'user-id',
   }
 
-  await domain.find(userId, query)
+  await domain.find(query)
 
   expect(findAll).toHaveBeenCalledWith({
     label: 'coffee',
     amount: 1000,
     tags: ['food'],
-    userId: '123',
+    user_id: 'user-id',
   }, { createdAt: 'ascending' })
 })
 
@@ -35,13 +31,16 @@ test('calls findAll with userId when not filtering by id', async () => {
   const findAll = jest.fn()
   const operations = { findAll }
 
-  const domain = operationsDomain({ operations })
+  const domain = operationsDomain<any>({ operations })
 
-  const userId = '123'
-  await domain.find(userId)
+  const query = {
+    user_id: '123',
+  }
+
+  await domain.find(query)
 
   expect(findAll).toHaveBeenCalledWith({
-    userId: '123',
+    user_id: '123',
   }, { createdAt: 'ascending' })
 })
 
@@ -49,14 +48,16 @@ test('calls findAll with userId when filtering by id', async () => {
   const findAll = jest.fn()
   const operations = { findAll }
 
-  const domain = operationsDomain({ operations })
+  const domain = operationsDomain<any>({ operations })
 
-  const userId = '123'
-  await domain.find(userId, { id: 'operation-id' })
+  await domain.find({
+    id: 'operation-id',
+    user_id: '123'
+  })
 
   expect(findAll).toHaveBeenCalledWith({
     id: 'operation-id',
-    userId: '123',
+    user_id: '123',
   }, { createdAt: 'ascending' })
 })
 
@@ -64,13 +65,14 @@ test('calls findAll with ascending sort by createdAt', async () => {
   const findAll = jest.fn()
   const operations = { findAll }
 
-  const domain = operationsDomain({ operations })
+  const domain = operationsDomain<any>({ operations })
 
-  const userId = '123'
-  await domain.find(userId)
+  await domain.find({
+    user_id: '123',
+  })
 
   expect(findAll).toHaveBeenCalledWith({
-    userId: '123',
+    user_id: '123',
   }, { createdAt: 'ascending' })
 })
 
@@ -78,10 +80,11 @@ test('returns the database response', async () => {
   const findAll = () => [{ id: 'operation-id' }]
   const operations = { findAll }
 
-  const domain = operationsDomain({ operations })
+  const domain = operationsDomain<any>({ operations })
 
-  const userId = '123'
-  const response = await domain.find(userId)
+  const response = await domain.find({
+    user_id: '123'
+  })
 
   expect(response).toEqual([
     { id: 'operation-id' },
