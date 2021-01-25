@@ -17,7 +17,7 @@ import Unauthorized from '../errors/Unauthorized'
 const secret = process.env.JWT_SECRET
 
 test('calls next when authentication token is valid', async () => {
-  const req = {
+  const req: any = {
     get: param => {
       if (param === 'Authorization') {
         const user = { id: 'user-id', email: 'test@email.com' }
@@ -27,7 +27,7 @@ test('calls next when authentication token is valid', async () => {
     }
   }
 
-  const res = { locals: {} }
+  const res: any = { locals: {} }
   const next = jest.fn()
 
   await authenticate(req, res, next)
@@ -36,7 +36,7 @@ test('calls next when authentication token is valid', async () => {
 })
 
 test('adds authenticated user to res.locals.authenticated', async () => {
-  const req = {
+  const req: any = {
     get: param => {
       if (param === 'Authorization') {
         const user = { id: 'user-id', email: 'test@email.com' }
@@ -46,7 +46,7 @@ test('adds authenticated user to res.locals.authenticated', async () => {
     }
   }
 
-  const res : { locals: { authenticated?: object } } = { locals: {} }
+  const res : any = { locals: {} }
   const next = jest.fn()
 
   await authenticate(req, res, next)
@@ -64,7 +64,7 @@ test('calls next with Unauthorized error when authentication token is invalid', 
   const options = { expiresIn: '1h' }
   const token = jwt.sign({ user }, secret, options)
 
-  const req = {
+  const req: any = {
     get: param => {
       if (param === 'Authorization') {
         return token
@@ -72,7 +72,7 @@ test('calls next with Unauthorized error when authentication token is invalid', 
     }
   }
 
-  const res = {}
+  const res: any = {}
   const next = jest.fn()
 
   const now = dayjs()
