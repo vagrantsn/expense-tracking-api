@@ -1,21 +1,25 @@
 import { Document, model, Schema } from 'mongoose'
 import { omit } from 'ramda'
 
-import UserType from '../../types/User'
+import UserType from '../../types/user'
 
 const userSchema = new Schema<User>({
   email: {
     type: String,
+    required: true,
     index: {
       unique: true,
     },
   },
-  password: String,
+  password: {
+    type: String,
+    required: true,
+  },
 }, {
   toObject: {
     transform: (doc, ret) : UserType => ({
+      ...omit(['_id', '__v'], ret) as User,
       id: doc.id,
-      ...omit(['_id', '__v'], ret),
     }),
   },
 })

@@ -1,7 +1,7 @@
 import { Document, model, Schema } from 'mongoose'
-import { omit, mergeRight } from 'ramda'
+import { omit } from 'ramda'
 
-import OperationType from '../../types/Operation'
+import OperationType from '../../types/operation'
 
 const operationSchema = new Schema<OperationType>({
   amount: {
@@ -18,6 +18,7 @@ const operationSchema = new Schema<OperationType>({
   },
   user_id: {
     type: Schema.Types.ObjectId,
+    required: true,
   },
 }, {
   timestamps: {
@@ -25,14 +26,20 @@ const operationSchema = new Schema<OperationType>({
     updatedAt: 'updated_at',
   },
   toObject: {
-    transform: (doc, ret) : OperationType => {
-      let cleanOperation = omit(['_id', '__v'], ret)
+    transform: (doc, ret) : OperationType => ({
+      ...omit(['_id', '__v'], ret) as Operation,
+      id: doc.id,
+      user_id: ret.user_id.toString(),
+    }),
+    // transform: (doc, ret) : OperationType => {
+    //   let cleanOperation = omit(['_id', '__v'], ret) as Operation
 
-      return mergeRight(cleanOperation, {
-        id: doc.id,
-        user_id: ret.user_id.toString(),
-      })
-    },
+    //   return {
+    //     ...cleanOperation,
+    //     id: doc.id,
+    //     user_id: ret.user_id.toString()
+    //   }
+    // },
   },
 })
 
