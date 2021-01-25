@@ -6,9 +6,10 @@ import { Types } from 'mongoose'
 
 import testdb from '../../../test/mongo'
 
+import User from '../../types/user'
 import create from './create'
 
-let user
+let user: User
 
 beforeAll(async () => {
   testdb.connect()

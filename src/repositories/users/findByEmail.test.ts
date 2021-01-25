@@ -3,12 +3,13 @@
  */
 
 import db from '../../database'
+import User from '../../types/user'
 
 import testdb from '../../../test/mongo'
 
 import findByEmail from './findByEmail'
 
-let user
+let user: User
 
 beforeAll(async () => {
   testdb.connect()
@@ -18,7 +19,7 @@ beforeAll(async () => {
     password: '123',
   }).save()
 
-  user = await findByEmail('test@email.com')
+  user = (await findByEmail('test@email.com'))!
 })
 
 afterAll(async () => {

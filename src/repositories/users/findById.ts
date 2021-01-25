@@ -1,7 +1,7 @@
 import db from '../../database'
-import User from '../../types/User'
+import { findById } from '../../types/database/users'
 
-const findById = async (id: string) : Promise<User|null> => {
+let findById: findById = async (id) => {
   const user = await db.User.findById(id)
 
   if (!user) return null

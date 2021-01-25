@@ -1,7 +1,7 @@
 import db from '../../database'
-import User from '../../types/User'
+import { findByEmail } from '../../types/database/users'
 
-const findByEmail = async (email: string) : Promise<User|null> => {
+let findByEmail: findByEmail = async (email) => {
   const user = await db.User.where('email', email).findOne()
 
   if (!user) return null
