@@ -1,14 +1,8 @@
-# Finance API :octocat:
+# Expense tracking API :octocat:
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ![build-and-test](https://github.com/vagnervst/finance-api/workflows/build-and-test/badge.svg)
 
-Expense tracking Node API intended for backend practicing. My main objective with this repo is to experiment with different technologies and practices so I can get a better understading of the most used solutions to common problems, and why they are used in the first place.
-
-Here I list some of them but this is not a full specification of what is used on the project:
-- JWT
-- Domain Driven Design
-- Test Driven Development
-- Backend integration on Jest
-- Dependency Injection to provide better interfaces for unit testing
+Expense tracking Node API intended for backend practicing.
 
 ## Running
 
