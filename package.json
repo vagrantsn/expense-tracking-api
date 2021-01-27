@@ -1,8 +1,15 @@
 {
   "name": "finance-api",
   "version": "0.0.1",
-  "description": "Expense tracker API",
-  "main": "src/index.js",
+  "description": "Expense tracking API",
+  "repository": {
+    "url": "https://github.com/vagnervst/expense-tracking-api"
+  },
+  "author": {
+    "name": "Vagner S",
+    "url": "https://github.com/vagnervst"
+  },
+  "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
     "start": "nodemon",
