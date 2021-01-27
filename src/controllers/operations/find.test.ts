@@ -7,7 +7,7 @@ import supertest from 'supertest'
 import testdb from '../../tests/mongo'
 import app from '../../app'
 
-import repositories from '../../repositories'
+import models from '../../models'
 
 import createSession from '../../tests/integration/sessions'
 
@@ -34,7 +34,7 @@ test('responds with empty array when there are no operations', async () => {
 test('responds with empty array when no operations are found', async () => {
   const { user, token } = await createSession()
 
-  await repositories.operations.create({
+  await models.operations.create({
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
@@ -54,7 +54,7 @@ test('responds with empty array when no operations are found', async () => {
 test('responds with found operations', async () => {
   const { user, token } = await createSession()
 
-  const operation = await repositories.operations.create({
+  const operation = await models.operations.create({
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
@@ -84,14 +84,14 @@ test('responds with found operations', async () => {
 test('responds with found operations sorted by created_at', async () => {
   const { user, token } = await createSession()
 
-  const operation = await repositories.operations.create({
+  const operation = await models.operations.create({
     amount: 1000,
     label: 'Coffee',
     tags: ['food'],
     user_id: user.id!,
   })
 
-  await repositories.operations.create({
+  await models.operations.create({
     amount: 1000,
     label: 'Cookies',
     tags: ['food'],

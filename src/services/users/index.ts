@@ -1,4 +1,4 @@
-import db from '../../repositories'
+import db from '../../models'
 
 import usersDomain from '../../domains/users'
 

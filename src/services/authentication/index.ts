@@ -1,4 +1,4 @@
-import db from '../../repositories'
+import db from '../../models'
 const secret = process.env.JWT_SECRET!
 
 import AuthenticationDomain from '../../domains/authentication'

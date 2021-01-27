@@ -8,7 +8,7 @@ import bcrypt from 'bcrypt'
 import testdb from '../../tests/mongo'
 import app from '../../app'
 
-import repositories from '../../repositories'
+import models from '../../models'
 
 const request = supertest(app)
 
@@ -36,7 +36,7 @@ test('should respond with required parameters error', async (done) => {
 })
 
 test('should respond with authorization token', async (done) => {
-  await repositories.users.create({
+  await models.users.create({
     email: 'test@email.com',
     password: bcrypt.hashSync('123', 10)
   })
