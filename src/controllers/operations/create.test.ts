@@ -24,9 +24,9 @@ test('should respond with required parameters error', async (done) => {
 
   const { body, status } = response
   expect(status).toBe(400)
-  expect(body.error).toBe('param-error')
-  expect(body.message).toBe('There is one or more invalid parameters')
-  expect(body.errors).toEqual([
+  expect(body.error.name).toBe('param-error')
+  expect(body.error.message).toBe('There is one or more invalid parameters')
+  expect(body.error.fields).toEqual([
     'body.amount is a required field',
     'body.label is a required field',
   ])
@@ -46,13 +46,13 @@ test('should respond with the created operation', async (done) => {
     })
 
   expect(status).toBe(200)
-  expect(typeof body.id).toBe('string')
-  expect(typeof body.created_at).toBe('string')
-  expect(typeof body.updated_at).toBe('string')
-  expect(body.amount).toBe(1000)
-  expect(body.label).toBe('Pizza')
-  expect(body.tags).toEqual(['food'])
-  expect(body.user_id).toBe(user.id)
+  expect(typeof body.data.id).toBe('string')
+  expect(typeof body.data.created_at).toBe('string')
+  expect(typeof body.data.updated_at).toBe('string')
+  expect(body.data.amount).toBe(1000)
+  expect(body.data.label).toBe('Pizza')
+  expect(body.data.tags).toEqual(['food'])
+  expect(body.data.user_id).toBe(user.id)
 
   done()
 })
@@ -65,8 +65,8 @@ test('should respond with unauthorized when credentials are wrong', async (done)
   })
 
   expect(status).toBe(401)
-  expect(body.error).toBe('unauthorized-authentication')
-  expect(body.message).toBe('Unauthorized Access')
+  expect(body.error.name).toBe('unauthorized-authentication')
+  expect(body.error.message).toBe('Unauthorized Access')
 
   done()
 })
@@ -79,8 +79,8 @@ test('should respond with unauthorized when user does not exist', async (done) =
   })
 
   expect(status).toBe(401)
-  expect(body.error).toBe('unauthorized-authentication')
-  expect(body.message).toBe('Unauthorized Access')
+  expect(body.error.name).toBe('unauthorized-authentication')
+  expect(body.error.message).toBe('Unauthorized Access')
 
   done()
 })

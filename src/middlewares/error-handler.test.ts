@@ -36,8 +36,10 @@ test('should respond with thrown error', () => {
 
   expect(res.mocks.status).toHaveBeenCalledWith(500)
   expect(res.mocks.json).toHaveBeenCalledWith({
-    error: 'test-error',
-    message: 'there was an error'
+    error: {
+      name: 'test-error',
+      message: 'there was an error',
+    },
   })
 })
 

@@ -1,20 +1,21 @@
-import { mergeRight } from 'ramda'
-
 import BadRequest from './BadRequest'
 
 class ParamError extends BadRequest {
-  errors = []
+  fields = []
 
-  constructor (errors) {
+  constructor (fields) {
     super('param-error', 'There is one or more invalid parameters')
 
-    this.errors = errors
+    this.fields = fields
   }
 
   toJson () {
     const json = super.toJson()
 
-    json.body = mergeRight(json.body, { errors: this.errors })
+    json.body = {
+      ...json.body,
+      fields: this.fields,
+    }
 
     return json
   }

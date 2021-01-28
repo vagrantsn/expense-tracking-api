@@ -7,7 +7,9 @@ const create = async (req, res) => {
 
   const token = await authenticationService.createToken({ email, password })
 
-  return res.status(200).json({ token })
+  return res.status(200).json({
+    data: { token },
+  })
 }
 
 export default wrapAsync(create)

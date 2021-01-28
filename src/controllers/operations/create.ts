@@ -20,7 +20,9 @@ const create: Handler = async (req, res) => {
     user_id: userId,
   })
 
-  return res.status(200).json(operation)
+  return res.status(200).json({
+    data: operation
+  })
 }
 
 export default wrapAsync(create)

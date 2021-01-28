@@ -25,9 +25,9 @@ test('should respond with required parameters error', async (done) => {
 
   const { body, status } = response
   expect(status).toBe(400)
-  expect(body.error).toBe('param-error')
-  expect(body.message).toBe('There is one or more invalid parameters')
-  expect(body.errors).toEqual([
+  expect(body.error.name).toBe('param-error')
+  expect(body.error.message).toBe('There is one or more invalid parameters')
+  expect(body.error.fields).toEqual([
     'body.email is a required field',
     'body.password is a required field',
   ])
@@ -47,7 +47,7 @@ test('should respond with authorization token', async (done) => {
   })
 
   expect(status).toBe(200)
-  expect(typeof body.token).toBe('string')
+  expect(typeof body.data.token).toBe('string')
 
   done()
 })
@@ -59,8 +59,8 @@ test('should respond with unauthorized when credentials are wrong', async (done)
   })
 
   expect(status).toBe(401)
-  expect(body.error).toBe('wrong-credentials')
-  expect(body.message).toBe('Invalid e-mail or password')
+  expect(body.error.name).toBe('wrong-credentials')
+  expect(body.error.message).toBe('Invalid e-mail or password')
 
   done()
 })
@@ -72,8 +72,8 @@ test('should respond with unauthorized when user does not exist', async (done) =
   })
 
   expect(status).toBe(401)
-  expect(body.error).toBe('wrong-credentials')
-  expect(body.message).toBe('Invalid e-mail or password')
+  expect(body.error.name).toBe('wrong-credentials')
+  expect(body.error.message).toBe('Invalid e-mail or password')
 
   done()
 })

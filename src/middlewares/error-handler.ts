@@ -8,7 +8,7 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
   const { responseCode, body } = err.toJson()
 
-  return res.status(responseCode).json(body)
+  return res.status(responseCode).json({ error: body })
 }
 
 export default errorHandler

@@ -28,7 +28,7 @@ test('responds with empty array when there are no operations', async () => {
     .set('Authorization', token)
 
   expect(status).toBe(200)
-  expect(body).toEqual([])
+  expect(body.data).toEqual([])
 })
 
 test('responds with empty array when no operations are found', async () => {
@@ -48,7 +48,7 @@ test('responds with empty array when no operations are found', async () => {
     })
 
   expect(status).toBe(200)
-  expect(body).toEqual([])
+  expect(body.data).toEqual([])
 })
 
 test('responds with found operations', async () => {
@@ -68,7 +68,7 @@ test('responds with found operations', async () => {
     })
 
   expect(status).toBe(200)
-  expect(body).toEqual([
+  expect(body.data).toEqual([
     {
       id: operation.id,
       amount: 1000,
@@ -105,6 +105,6 @@ test('responds with found operations sorted by created_at', async () => {
     })
 
   expect(status).toBe(200)
-  expect(body).toHaveLength(2)
-  expect(body[0].id).toEqual(operation.id)
+  expect(body.data).toHaveLength(2)
+  expect(body.data[0].id).toEqual(operation.id)
 })

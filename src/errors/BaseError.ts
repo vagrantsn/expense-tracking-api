@@ -1,3 +1,12 @@
+interface errorResponse {
+  responseCode: number,
+  body: {
+    name: string,
+    message: string,
+    fields?: string[],
+  }
+}
+
 class BaseError {
   name = ''
   message = ''
@@ -9,13 +18,13 @@ class BaseError {
     this.responseCode = responseCode
   }
 
-  toJson () {
+  toJson (): errorResponse {
     const { responseCode, message, name } = this
 
     return {
       responseCode,
       body: {
-        error: name,
+        name: name,
         message,
       }
     }

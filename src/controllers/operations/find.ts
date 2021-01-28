@@ -20,7 +20,9 @@ const find: Handler = async (req, res) => {
     user_id: userId,
   })
 
-  return res.status(200).json(operations)
+  return res.status(200).json({
+    data: operations
+  })
 }
 
 export default wrapAsync(find)
